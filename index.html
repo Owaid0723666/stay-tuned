@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>请勿换台 · STAY TUNED</title>
+<style>
+  :root { --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", Georgia, "Times New Roman", serif; }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: radial-gradient(ellipse at 50% 38%, #1a1613 0%, #0b0a09 62%) #0b0a09;
+    color: #cfc6b6; font-family: var(--serif); font-size: 15px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    user-select: none; -webkit-user-select: none; overflow: hidden;
+  }
+  #tv {
+    width: min(94vw, calc((100vh - 150px) * 4 / 3), 980px);
+    background: #1b1917; border: 1px solid #2d2a26; border-radius: 14px; padding: 20px 20px 14px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .7), inset 0 1px 0 rgba(255, 255, 255, .04);
+  }
+  #glass { position: relative; aspect-ratio: 4 / 3; border-radius: 26px / 30px; overflow: hidden; background: #000; }
+  #screen { display: block; width: 100%; height: 100%; filter: blur(.5px) contrast(1.12) saturate(1.25) brightness(1.08); }
+  #lines {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, .55) 100%),
+      linear-gradient(115deg, rgba(255, 255, 255, .05) 0%, transparent 28%),
+      repeating-linear-gradient(to bottom, rgba(0, 0, 0, .3) 0 1px, transparent 1px 3px);
+  }
+  .ov {
+    position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; padding: 6%; text-align: center; background: rgba(0, 0, 0, .62); color: #ebe3d3;
+  }
+  .ov[hidden] { display: none; }
+  .ov h1 { margin: 0; font-size: clamp(34px, 7vw, 64px); font-weight: 700; letter-spacing: .12em; text-shadow: -2px 0 rgba(255, 40, 60, .6), 2px 0 rgba(40, 220, 255, .6); }
+  .ov h2 { margin: 0; font-size: clamp(24px, 4.4vw, 40px); font-weight: 700; }
+  .ov p { margin: 0; font-size: clamp(15px, 1.9vw, 20px); line-height: 1.7; }
+  .ov .dim { color: #a69d8d; font-size: clamp(14px, 1.6vw, 17px); }
+  button {
+    font-family: var(--serif); font-size: 15px; color: #ded5c5; background: #2a2622;
+    border: 1px solid #4a443d; border-radius: 4px; padding: 9px 16px; cursor: pointer;
+  }
+  button:hover { background: #342f2a; }
+  button:active { transform: translateY(1px); }
+  button:disabled { opacity: .55; cursor: default; }
+  button:focus-visible { outline: 2px solid #c9a227; outline-offset: 2px; }
+  button.main { background: #c9a227; border-color: #e1bd4a; color: #17130a; font-size: clamp(17px, 2.1vw, 22px); font-weight: 700; padding: 11px 28px; }
+  button.main:hover { background: #d8b23a; }
+  button.plain { background: none; border-color: transparent; text-decoration: underline; color: #a69d8d; }
+  #panel { display: flex; align-items: center; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  #brand { font-size: 14px; color: #7d766a; margin-right: auto; }
+  #led {
+    min-width: 46px; text-align: center; padding: 4px 8px; background: #0a0504; border: 1px solid #2d2a26; border-radius: 3px;
+    color: #ff3b20; font: 700 24px/1.1 Consolas, "Courier New", monospace; text-shadow: 0 0 8px rgba(255, 59, 32, .7);
+  }
+  #bPower { background: #5a1f1a; border-color: #7c2e27; }
+  #bPower:hover { background: #6a2620; }
+  #bMute.on { border-color: #c9a227; color: #e6c75a; }
+  #keys { margin: 0; font-size: 15px; color: #8f887b; }
+</style>
+</head>
+<body>
+  <div id="tv">
+    <div id="glass">
+      <canvas id="screen" width="640" height="480"></canvas>
+      <div id="lines"></div>
+      <div id="menu" class="ov">
+        <h1 id="tTitle"></h1>
+        <p id="tSub"></p>
+        <button id="bStart" class="main" disabled></button>
+        <p id="tWarn" class="dim"></p>
+        <button id="bLang" class="plain"></button>
+      </div>
+      <div id="end" class="ov" hidden>
+        <h2 id="eTitle"></h2>
+        <p id="eWhy"></p>
+        <p id="eReached" class="dim"></p>
+        <button id="bAgain" class="main"></button>
+      </div>
+    </div>
+    <div id="panel">
+      <span id="brand">VALE · VISION</span>
+      <div id="led">--</div>
+      <button id="bDown"></button>
+      <button id="bUp"></button>
+      <button id="bMute"></button>
+      <button id="bPower"></button>
+    </div>
+  </div>
+  <p id="keys"></p>
+  <script src="text.js"></script>
+  <script src="audio.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+Image sources (Wikimedia Commons). All CC0 or public domain; edited (cropped, greyscale, retouched).
+
+img/road.jpg  <-  Foggy Country Road (Unsplash).jpg
+    https://commons.wikimedia.org/wiki/File:Foggy_Country_Road_(Unsplash).jpg
+    License: CC0
+
+img/house.jpg  <-  Abandoned rural house (Unsplash).jpg
+    https://commons.wikimedia.org/wiki/File:Abandoned_rural_house_(Unsplash).jpg
+    License: CC0
+
+img/room.jpg  <-  Cracked Cream Walls (Unsplash).jpg
+    https://commons.wikimedia.org/wiki/File:Cracked_Cream_Walls_(Unsplash).jpg
+    License: CC0
+
+img/profile.jpg  <-  -Unidentified Woman- MET 37.14.13.jpg
+    https://commons.wikimedia.org/wiki/File:-Unidentified_Woman-_MET_37.14.13.jpg
+    License: CC0
+
+img/stare.jpg  <-  -Unidentified Woman- MET 37.14.18.jpg
+    https://commons.wikimedia.org/wiki/File:-Unidentified_Woman-_MET_37.14.18.jpg
+    License: CC0
+
+img/manq.jpg  <-  David Cohen 2016-12-06 (Unsplash).jpg
+    https://commons.wikimedia.org/wiki/File:David_Cohen_2016-12-06_(Unsplash).jpg
+    License: CC0
+
+img/face.jpg  <-  Frozen Charlie Portrait.jpg
+    https://commons.wikimedia.org/wiki/File:Frozen_Charlie_Portrait.jpg
+    License: Public domain
+
