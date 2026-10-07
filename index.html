@@ -2,7 +2,9 @@
 <html lang="zh">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="description" content="深夜电视恐怖小游戏，一局约三分钟。A three-minute late-night television horror game.">
+<meta name="theme-color" content="#0b0a09">
 <title>请勿换台 · STAY TUNED</title>
 <style>
   :root { --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", Georgia, "Times New Roman", serif; }
@@ -58,6 +60,33 @@
   #bPower:hover { background: #6a2620; }
   #bMute.on { border-color: #c9a227; color: #e6c75a; }
   #keys { margin: 0; font-size: 15px; color: #8f887b; }
+  #tTurn { display: none; }
+
+  /* 手机：横着玩，屏幕居中，按钮分在两边；竖着拿的时候整个画面转 90 度。长边短边由 game.js 量好交过来 */
+  .phone body { display: block; position: fixed; inset: 0; }
+  .phone #keys, .phone #brand { display: none; }
+  .phone #tv {
+    --sh: min(var(--vh), calc((var(--vw) - 168px) * .75));
+    position: absolute; left: 0; top: 0; width: var(--vw); height: var(--vh);
+    display: grid; grid-template: "led glass ." auto "up glass power" 1fr "down glass mute" 1fr / 1fr calc(var(--sh) * 4 / 3) 1fr;
+    padding: 0; border: 0; border-radius: 0; box-shadow: none; background: #100e0d;
+  }
+  .phone.port #tv { left: var(--vh); transform-origin: 0 0; transform: rotate(90deg); }
+  .phone.port #tTurn { display: block; }
+  .phone #glass { grid-area: glass; align-self: center; height: var(--sh); aspect-ratio: auto; border-radius: 18px / 20px; }
+  .phone #panel { display: contents; }
+  .phone #led { grid-area: led; justify-self: center; margin: 10px 0 2px; }
+  .phone #panel button { margin: 6px 8px; padding: 0; font-size: 16px; border-radius: 6px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  .phone #bUp { grid-area: up; }
+  .phone #bDown { grid-area: down; }
+  .phone #bPower { grid-area: power; }
+  .phone #bMute { grid-area: mute; }
+  .phone .ov { gap: 8px; padding: 3% 5%; }
+  .phone .ov h1 { font-size: 32px; }
+  .phone .ov h2 { font-size: 26px; }
+  .phone .ov p { font-size: 15px; line-height: 1.5; }
+  .phone .ov .dim { font-size: 13px; }
+  .phone button.main { font-size: 17px; padding: 9px 24px; }
 </style>
 </head>
 <body>
@@ -68,6 +97,7 @@
       <div id="menu" class="ov">
         <h1 id="tTitle"></h1>
         <p id="tSub"></p>
+        <p id="tTurn"></p>
         <button id="bStart" class="main" disabled></button>
         <p id="tWarn" class="dim"></p>
         <button id="bLang" class="plain"></button>

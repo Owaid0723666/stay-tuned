@@ -13,7 +13,8 @@ const mk = () => { const e = { on: {}, classList: { toggle: noop }, blur: noop, 
 const els = {};
 Object.assign(globalThis, {
   window: globalThis, location: { search: '?test=1&lang=zh' }, addEventListener: noop, requestAnimationFrame: noop,
-  document: { documentElement: {}, getElementById: id => els[id] ||= mk(), createElement: mk },
+  matchMedia: () => ({ matches: false }), screen: { width: 1280, height: 800 },
+  document: { documentElement: mk(), addEventListener: noop, getElementById: id => els[id] ||= mk(), createElement: mk },
   Image: class { set src(v) { queueMicrotask(() => this.onload()); } },
 });
 (0, eval)(['text.js', 'audio.js', 'game.js'].map(f => readFileSync(new URL(f, import.meta.url), 'utf8')).join('\n'));

@@ -10,6 +10,17 @@ if (!TEXT[lang]) lang = 'en';
 let T = TEXT[lang];
 const font = () => lang === 'zh' ? '"SimHei","Microsoft YaHei","PingFang SC","Heiti SC",sans-serif' : '"Courier New",Courier,monospace';
 
+// ---------- 手机：横着玩。竖着拿的时候把整个画面转 90 度，量好长边短边交给样式去排 ----------
+const root = document.documentElement;
+const phone = q.has('m') || (matchMedia('(pointer: coarse)').matches && Math.min(screen.width, screen.height) <= 540);
+function fit() {
+  const w = innerWidth, h = innerHeight, port = h > w;
+  root.classList.toggle('port', port);
+  root.style.setProperty('--vw', (port ? h : w) + 'px'); root.style.setProperty('--vh', (port ? w : h) + 'px');
+}
+if (phone) { root.classList.add('phone'); fit(); addEventListener('resize', fit); }
+document.addEventListener('visibilitychange', () => Snd.pause(document.hidden));
+
 // ---------- 图片：哪张没下下来，那个画面就显示「信号中断」，游戏照常能玩 ----------
 const IMG = {}, NAMES = ['road', 'house', 'room', 'profile', 'stare', 'manq', 'face'];
 let pending = NAMES.length, isReady = false;
@@ -182,20 +193,22 @@ addEventListener('keydown', e => {
   else return;
   e.preventDefault();
 });
-const tap = (id, fn) => $(id).addEventListener('click', e => { fn(); e.currentTarget.blur(); });
+const tap = (id, fn) => $(id).addEventListener('click', e => { Snd.pause(false); fn(); e.currentTarget.blur(); });
 tap('bUp', () => chan(1)); tap('bDown', () => chan(-1)); tap('bMute', mute); tap('bPower', power);
 tap('bStart', start); tap('bAgain', start);
 tap('bLang', () => { lang = lang === 'zh' ? 'en' : 'zh'; applyLang(); });
 
 function applyLang() {
-  T = TEXT[lang]; document.documentElement.lang = lang;
-  $('tTitle').textContent = T.title; $('tSub').textContent = T.sub; $('tWarn').textContent = T.warn;
+  T = TEXT[lang]; root.lang = lang;
+  $('tTitle').textContent = T.title; $('tSub').textContent = T.sub; $('tTurn').textContent = T.turn; $('tWarn').textContent = phone ? T.warnPhone : T.warn;
   $('bLang').textContent = T.lang; $('bStart').textContent = isReady ? T.start : T.loading; $('keys').textContent = T.keys;
   $('bUp').textContent = T.bUp; $('bDown').textContent = T.bDown; $('bMute').textContent = T.bMute;
   $('bPower').textContent = T.bPower; $('bAgain').textContent = T.again;
 }
 function start() {
   try { Snd.init(); } catch (e) { /* 没声音也能玩 */ }
+  // 安卓手机顺手全屏并锁成横屏；苹果手机不让，就靠上面那套转 90 度
+  if (phone) try { root.requestFullscreen().then(() => screen.orientation.lock('landscape')).catch(() => {}); } catch (e) { /* 照常玩 */ }
   S = fresh(); S.on = true; S.powT = 0;
   $('menu').hidden = true; $('end').hidden = true;
 }

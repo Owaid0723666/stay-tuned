@@ -3,6 +3,7 @@ const TEXT = {
   zh: {
     title: '请勿换台', sub: '深夜电视 · 约三分钟', start: '打开电视', loading: '正在调谐……', lang: 'English',
     warn: '含闪烁画面与突发声响，建议佩戴耳机。',
+    warnPhone: '含闪烁画面与突发声响。请打开手机声音，建议佩戴耳机。', turn: '请把手机横过来玩。',
     keys: '方向键换台　　M 静音　　空格 开关电视',
     bUp: '频道 +', bDown: '频道 −', bMute: '静音', bPower: '电源',
     mute: '静音', noSignal: '信号中断',
@@ -46,6 +47,7 @@ const TEXT = {
   en: {
     title: 'STAY TUNED', sub: 'Late-night television · about three minutes', start: 'Turn on the TV', loading: 'Tuning…', lang: '中文',
     warn: 'Contains flashing images and sudden loud sounds. Headphones recommended.',
+    warnPhone: 'Contains flashing images and sudden loud sounds. Turn your sound on. Headphones recommended.', turn: 'Turn your phone sideways to play.',
     keys: 'Arrow keys: channel　　M: mute　　Space: power',
     bUp: 'CH +', bDown: 'CH −', bMute: 'Mute', bPower: 'Power',
     mute: 'MUTE', noSignal: 'NO SIGNAL',

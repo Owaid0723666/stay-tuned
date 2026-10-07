@@ -46,6 +46,8 @@ const Snd = (() => {
 
   return {
     init,
+    // 切到别的页面、锁屏时停声，回来再接上
+    pause(stop) { if (ac) stop ? ac.suspend() : ac.resume(); },
     level(name, v) { if (ac) lv[name].gain.setTargetAtTime(v, now(), 0.04); },
     tvGate(open) { if (ac) tv.gain.setTargetAtTime(open ? 1 : 0, now(), 0.015); },
     // 应急广播的提示音，响 dur 秒；dur 给 0 就是立刻掐掉
